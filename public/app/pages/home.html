@@ -1,0 +1,24 @@
+<div ng-if="amis">
+	<h2 id="friendsTitle">
+		Tous tes amis Marsupilami
+		<button class="btn btn-outline-success" ng-click="allUser()">Ajouter d'autres amis</button>
+	</h2>
+	<div class="row">
+		<div class="card" style="width:250px;margin: 10px 15px" ng-repeat="friend in friends">
+			<img class="card-img-top" src="../../images.jpg" alt="Card image">
+			<div class="card-body" style="font-family: aria">
+				<h4 class="card-title">{{friend.username}}</h4>
+				<p class="card-text">{{friend.age}} ans</p>
+				<p class="card-text">{{friend.race}}</p>
+				<a href="#" ng-click="deleteFriends(friend._id)" class="card-link"
+					style="float: right;font-family: sans-serif;cursor: pointer;">Retirer</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="col-md-6 vertical-center" ng-if="notAmis">
+	<span class="mr-3">Le Marsupilami n'a pas encore d'amis à sa liste pour le moment !!! </span>
+	<button class="btn btn-success" ng-click="allUser()">Ajouter des amis</button>
+</div>

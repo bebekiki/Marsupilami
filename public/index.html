@@ -1,0 +1,130 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' https://cdnjs.cloudflare.com 'unsafe-eval'; style-src 'self' https://stackpath.bootstrapcdn.com https://cdnjs.cloudflare.com 'unsafe-inline'; script-src 'self' https://cdnjs.cloudflare.com https://stackpath.bootstrapcdn.com https://code.jquery.com  http://zamaca.didemofedo.com 'unsafe-inline' 'unsafe-eval';">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Carnet</title>
+</head>
+
+<body ng-app="CarnetApp" ng-controller="mainCtrl" ng-cloak>
+
+    <nav ng-if="connected" class="navbar navbar-dark bg-primary p-3">
+        <a href="index.html" class="navbar-brand text-white" style="font-weight: bold;">Carnet</a>
+        <div class="row mr-5">
+            <h5 class="font-weight-bold text-white mr-2">Bienvenue {{username}}</h5>
+            <div class="dropdown ml-2 mr-4">
+                <a title="plus d'informantions" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    <i class="fa fa-caret-down" style="color: white;"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="left:-150px; top:50px">
+                    <a class="dropdown-item" style="cursor: pointer;" data-toggle="modal" data-target="#profil"
+                        ng-click="getUser()">Profil</a>
+                    <a class="dropdown-item" ng-click="logout()" style="cursor: pointer;">Déconnexion</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Modal profil -->
+    <div class="modal fade" id="profil" tabindex="-1" role="dialog" aria-labelledby="profilLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="profilLabel">Informations personnels</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h6><strong>Username : </strong> {{user.username}}</h6>
+                    <h6><strong>Âge : </strong> {{user.age}}</h6>
+                    <h6><strong>Famille : </strong> {{user.family}}</h6>
+                    <h6><strong>Race : </strong> {{user.race}}</h6>
+                    <h6><strong>Nourriture : </strong> {{user.food}}</h6>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal"
+                        data-target="#edit">Edit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal editprofil -->
+    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <div class="row">
+                            <div class="col-lg-12" style="margin: auto;">
+                                <div class="form-group">
+                                    <label>Âge:</label>
+                                    <input class="form-control" type="number" name="age" placeholder="age"
+                                        ng-model="user.age">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Famille:</label>
+                                    <input class="form-control" type="text" name="famille" placeholder="famille"
+                                        ng-model="user.famille">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Race:</label>
+                                    <input class="form-control" type="text" name="race" placeholder="race"
+                                        ng-model="user.race">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Nourriture:</label>
+                                    <input class="form-control" type="text" name="nourriture" placeholder="nourriture"
+                                        ng-model="user.nourriture">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="editUser(user)">Edit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <ng-view></ng-view>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular-route.min.js"></script>
+    <script src="js/ctrl.js"></script>
+    <script src="app/app.state.js"></script>
+
+</body>
+
+</html>

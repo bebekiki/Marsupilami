@@ -1,0 +1,12 @@
+<h2 id="friendsTitle">Tous les Marsupilami</h2>
+<div class="row">
+    <div class="card" style="width:250px;margin: 10px 15px" ng-repeat="allFriend in allFriends">
+        <img class="card-img-top" src="../../images.jpg" alt="Card image">
+        <div class="card-body" style="font-family: aria">
+            <h4 class="card-title">{{allFriend.username}}</h4>
+            <p class="card-text">{{allFriend.age}} ans</p>
+            <p class="card-text">{{allFriend.race}}</p>
+            <a href="#" ng-click="addFriends(allFriend._id)" class="card-link" style="float: right;font-family: sans-serif;cursor: pointer;">Ajouter</a>
+        </div>
+    </div>
+</div>
