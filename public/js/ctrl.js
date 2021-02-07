@@ -192,6 +192,13 @@ app.controller('friendsCtrl', function ($scope, $location, $http, $window) {
                 }
                 else {
                     $scope.allFriends = data.message;
+                    if ($scope.allFriends.length == 0) {
+                        $scope.inscrits = false;
+                        $scope.notInscrits = true;
+                    } else {
+                        $scope.inscrits = true;
+                        $scope.notInscrits = false;
+                    }
                 }
             })
             .error(function (data) {
@@ -218,4 +225,3 @@ app.controller('friendsCtrl', function ($scope, $location, $http, $window) {
     }
 
 })
-
