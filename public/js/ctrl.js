@@ -11,6 +11,9 @@ app.controller('mainCtrl', function ($scope, $location, $http, $window, $rootSco
     }
     else if (connect == "0") {
         $scope.connected = false;
+        $location.path('/login');
+    }else{
+        $location.path('/login');
     }
 
     $scope.logout = function () {
