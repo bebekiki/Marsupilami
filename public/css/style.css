@@ -10,6 +10,6 @@
     margin: 10px auto;
 }
 
-body{
+body,#content-profil,#content-edit{
     background-color: #f9f9f9;
 }
