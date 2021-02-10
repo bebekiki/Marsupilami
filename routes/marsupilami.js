@@ -63,10 +63,6 @@ router.post('/register', async function (req, res) {
     }
 })
 
-
-//add
-
-
 //get all marsupilami
 router.get('/all/:id', async function (req, res) {
     var allId = [];
