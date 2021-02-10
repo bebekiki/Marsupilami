@@ -18,7 +18,6 @@ router.post('/login', async function (req, res) {
                 if (!data) {
                     res.json({ success: false, message: 'Aucun marsupilami trouve' });
                 } else if (data) {
-                    console.log(data);
                     if (data.password !== req.body.password) {
                         res.json({ success: false, message: 'Mot de pass incorrect' });
                     }
@@ -63,6 +62,9 @@ router.post('/register', async function (req, res) {
         })
     }
 })
+
+
+//add
 
 
 //get all marsupilami
@@ -131,6 +133,33 @@ router.get('/:friend/:id', async function (req, res) {
         })
 })
 
+//add new friend
+router.post('/addNewFriend/:id', async function(req,res){
+    var currentMarsupilami = await Marsupilami.findById(req.params.id);
+    const marsupilami = new Marsupilami({
+        username: req.body.username,
+        password: req.body.password,
+        age: req.body.age,
+        family: req.body.family,
+        race: req.body.race,
+        food: req.body.food
+    })
+    await marsupilami.save()
+    .then(data => {
+        currentMarsupilami.friends.push(data._id);
+    }).catch(err => {
+        res.json({ success: false, message: err });
+    })
+
+    await currentMarsupilami.save()
+        .then(data => {
+            res.json({ success: true, message: data });
+        }).catch(err => {
+            res.json({ success: false, message: err });
+        })
+
+
+})
 
 //add marsupilami as friends
 router.get('/add/:id/:friend', async function (req, res) {
@@ -161,7 +190,6 @@ router.patch('/:id', async function (req, res) {
             if (err) {
                 res.json({ success: false, message: err });
             } else {
-                console.log(data);
                 res.json({ success: true, message: data });
             }
         })
