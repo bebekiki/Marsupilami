@@ -64,6 +64,23 @@ app.controller('homeCtrl', function ($scope, $location, $http, $window) {
     $scope.allUser = function () {
         $location.path('/friends');
     }
+
+    $scope.ajouter = function(user){
+        var id = $window.sessionStorage.getItem('id');
+        $http.post('/api/addNewFriend/' + id, user)
+            .success(function (data) {
+                if (data.success == false) {
+                    console.log(data.message);
+                }
+                else {
+                    $scope.allFriends();
+                }
+            })
+            .error(function (data) {
+                console.log('Error: ' + data);
+            });
+    }
+
     $scope.allFriends = function () {
         var id = $window.sessionStorage.getItem('id');
         $http.get('/api/friend/' + id)
@@ -97,7 +114,7 @@ app.controller('homeCtrl', function ($scope, $location, $http, $window) {
                     $location.path('/home');
                 }
                 else {
-                    console.log(data.message);
+                    $location.path('/home');
                 }
             })
             .error(function (data) {
@@ -213,10 +230,10 @@ app.controller('friendsCtrl', function ($scope, $location, $http, $window) {
             .success(function (data) {
                 if (data.success == false) {
                     $scope.message = data.message;
-                    $location.path('/home');
                 }
                 else {
                     $scope.allFriends = data.message;
+                    $location.path('/home');
                 }
             })
             .error(function (data) {
