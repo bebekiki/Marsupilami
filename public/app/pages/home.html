@@ -1,8 +1,9 @@
-<div ng-if="amis">
-	<h2 id="friendsTitle">
+<h2 id="friendsTitle">
 		Tous tes amis Marsupilami
-		<button class="btn btn-outline-success" ng-click="allUser()">Ajouter d'autres amis</button>
+		<button class="btn btn-outline-success" data-dismiss="modal" data-toggle="modal"
+		data-target="#ajouter">Ajouter d'autres amis</button>
 	</h2>
+<div ng-if="amis">
 	<div class="row">
 		<div class="card" style="width:250px;margin: 10px 15px" ng-repeat="friend in friends">
 			<img class="card-img-top" src="../../images.jpg" alt="Card image">
@@ -20,5 +21,64 @@
 
 <div class="col-md-6 vertical-center" ng-if="notAmis">
 	<span class="mr-3">Le Marsupilami n'a pas encore d'amis à sa liste pour le moment !!! </span>
-	<button class="btn btn-success" ng-click="allUser()">Ajouter des amis</button>
+</div>
+
+
+<!-- Modal new friend -->
+<div class="modal fade" id="ajouter" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-scrollable" role="document">
+		<div class="modal-content" id="content-add">
+			<div class="modal-header">
+				<h5 class="modal-title" id="editTitle">Ajouter un nouvel amis</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form id="editForm">
+					<div class="row">
+						<div class="col-lg-12" style="margin: auto;">
+							<div class="form-group">
+								<label>Username:</label>
+								<input class="form-control" type="text" name="username" placeholder="username"
+									ng-model="user.username">
+							</div>
+							<div class="form-group">
+								<label>Password:</label>
+								<input class="form-control" type="password" name="password" placeholder="password"
+									ng-model="user.password">
+							</div>
+							<div class="form-group">
+								<label>Âge:</label>
+								<input class="form-control" type="number" name="age" placeholder="age"
+									ng-model="user.age">
+							</div>
+
+							<div class="form-group">
+								<label>Famille:</label>
+								<input class="form-control" type="text" name="famille" placeholder="famille"
+									ng-model="user.family">
+							</div>
+
+							<div class="form-group">
+								<label>Race:</label>
+								<input class="form-control" type="text" name="race" placeholder="race"
+									ng-model="user.race">
+							</div>
+
+							<div class="form-group">
+								<label>Nourriture:</label>
+								<input class="form-control" type="text" name="nourriture" placeholder="nourriture"
+									ng-model="user.food">
+							</div>
+						</div>
+					</div>
+					<div class="text-right">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary"  data-dismiss="modal" ng-click="ajouter(user)">Ajouter</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
